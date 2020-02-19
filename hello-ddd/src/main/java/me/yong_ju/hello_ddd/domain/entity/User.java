@@ -8,7 +8,7 @@ import me.yong_ju.hello_ddd.domain.valueobject.UserName;
 public class User {
   private final UserId id;
   private UserName name;
-  private final MailAddress mailAddress;
+  private MailAddress mailAddress;
 
   public User(UserId id, UserName name, MailAddress mailAddress) {
     Objects.requireNonNull(id);
@@ -25,6 +25,18 @@ public class User {
   public UserName getName() { return name; }
 
   public MailAddress getMailAddress() { return mailAddress; }
+
+  public void changeName(UserName newName) {
+    Objects.requireNonNull(newName);
+
+    this.name = newName;
+  }
+
+  public void changeMailAddress(MailAddress newMailAddress) {
+    Objects.requireNonNull(newMailAddress);
+
+    this.mailAddress = newMailAddress;
+  }
 
   @Override
   public boolean equals(Object object) {
