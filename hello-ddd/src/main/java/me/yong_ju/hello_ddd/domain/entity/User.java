@@ -7,7 +7,7 @@ import me.yong_ju.hello_ddd.domain.valueobject.UserName;
 
 public class User {
   private final UserId id;
-  private final UserName name;
+  private UserName name;
   private final MailAddress mailAddress;
 
   public User(UserId id, UserName name, MailAddress mailAddress) {

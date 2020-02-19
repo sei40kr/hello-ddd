@@ -1,6 +1,9 @@
 package me.yong_ju.hello_ddd.application.service;
 
+import java.util.Optional;
 import java.util.UUID;
+
+import me.yong_ju.hello_ddd.application.dto.UserData;
 import me.yong_ju.hello_ddd.application.exception.CanNotRegisterUserException;
 import me.yong_ju.hello_ddd.domain.entity.User;
 import me.yong_ju.hello_ddd.domain.repository.IUserRepository;
@@ -31,5 +34,13 @@ public class UserApplicationService {
     }
 
     userRepository.save(anUser);
+  }
+
+  public Optional<UserData> get(String userId) {
+    return userRepository.find(new UserId(userId))
+        .map(anUser
+             -> new UserData(anUser.getId().getValue(),
+                             anUser.getName().getValue(),
+                             anUser.getMailAddress().getValue()));
   }
 }
