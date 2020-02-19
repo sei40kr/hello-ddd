@@ -2,6 +2,7 @@ package me.yong_ju.hello_ddd.application.service;
 
 import java.util.Optional;
 import java.util.UUID;
+import me.yong_ju.hello_ddd.application.command.UserUpdateCommand;
 import me.yong_ju.hello_ddd.application.dto.UserData;
 import me.yong_ju.hello_ddd.application.exception.CanNotRegisterUserException;
 import me.yong_ju.hello_ddd.application.exception.UserNotFoundException;
@@ -44,22 +45,13 @@ public class UserApplicationService {
                              anUser.getMailAddress().getValue()));
   }
 
-  public void update(String userId)
+  public void update(UserUpdateCommand command)
       throws UserNotFoundException, CanNotRegisterUserException {
-    update(userId, null, null);
-  }
-
-  public void update(String userId, String name)
-      throws UserNotFoundException, CanNotRegisterUserException {
-    update(userId, name, null);
-  }
-
-  public void update(String userId, String name, String mailAddress)
-      throws UserNotFoundException, CanNotRegisterUserException {
-    var targetId = new UserId(userId);
+    var targetId = new UserId(command.getId());
     var anUser = userRepository.find(targetId).orElseThrow(
         () -> new UserNotFoundException(targetId));
 
+    var name = command.getName();
     if (name != null) {
       var newUserName = new UserName(name);
       anUser.changeName(newUserName);
@@ -69,6 +61,7 @@ public class UserApplicationService {
       }
     }
 
+    var mailAddress = command.getMailAddress();
     if (mailAddress != null) {
       var newMailAddress = new MailAddress(mailAddress);
       anUser.changeMailAddress(newMailAddress);
