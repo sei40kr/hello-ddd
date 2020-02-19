@@ -11,6 +11,8 @@ public class UserId {
     this.value = value;
   }
 
+  public String getValue() { return value; }
+
   @Override
   public boolean equals(Object object) {
     if (this == object) {
