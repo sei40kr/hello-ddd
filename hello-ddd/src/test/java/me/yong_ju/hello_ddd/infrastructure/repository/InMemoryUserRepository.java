@@ -12,6 +12,11 @@ public class InMemoryUserRepository implements IUserRepository {
   private Map<UserId, User> store = new HashMap<>();
 
   @Override
+  public Optional<User> find(UserId anUserId) {
+    return Optional.ofNullable(store.get(anUserId));
+  }
+
+  @Override
   public Optional<User> find(final UserName anUserName) {
     return store.entrySet()
         .stream()
