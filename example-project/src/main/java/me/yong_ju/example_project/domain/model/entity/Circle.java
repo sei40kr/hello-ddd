@@ -2,7 +2,7 @@ package me.yong_ju.example_project.domain.model.entity;
 
 import java.util.List;
 import java.util.Objects;
-
+import me.yong_ju.example_project.application.exception.CircleFullException;
 import me.yong_ju.example_project.domain.model.valueobject.CircleId;
 import me.yong_ju.example_project.domain.model.valueobject.CircleName;
 
@@ -30,5 +30,18 @@ public class Circle {
 
   public User getOwner() { return owner; }
 
-  public List<User> getMembers() { return members; }
+  /**
+   * サークルのオーナーを含めて 30 名か確認
+   */
+  public boolean isFull() { return members.size() >= 29; }
+
+  public void join(User member) throws CircleFullException {
+    Objects.requireNonNull(member);
+
+    if (isFull()) {
+      throw new CircleFullException(id);
+    }
+
+    members.add(member);
+  }
 }

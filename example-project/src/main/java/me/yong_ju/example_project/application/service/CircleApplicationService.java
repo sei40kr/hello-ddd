@@ -66,12 +66,8 @@ public class CircleApplicationService {
             -> new CircleNotFoundException(id,
                                            "サークルが見つかりませんでした。"));
 
-    // サークルのオーナーを含めて 30 名か確認
-    if (circle.getMembers().size() >= 29) {
-      throw new CircleFullException(id);
-    }
+    circle.join(member);
 
-    circle.getMembers().add(member);
     circleRepository.save(circle);
   }
 
