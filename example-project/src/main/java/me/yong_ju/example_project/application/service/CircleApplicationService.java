@@ -96,7 +96,7 @@ public class CircleApplicationService {
             -> new CircleNotFoundException(circleId,
                                            "サークルが見つかりませんでした。"));
 
-    if (circle.getMembers().size() >= 29) {
+    if (circle.isFull()) {
       throw new CircleFullException(circleId);
     }
 
