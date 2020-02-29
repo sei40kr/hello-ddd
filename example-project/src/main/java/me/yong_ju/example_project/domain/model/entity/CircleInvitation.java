@@ -16,4 +16,10 @@ public class CircleInvitation {
     this.fromUser = fromUser;
     this.invitedUser = invitedUser;
   }
+
+  public Circle getCircle() { return circle; }
+
+  public User getInvitedUser() { return invitedUser; }
+
+  public User getFromUser() { return fromUser; }
 }

@@ -2,7 +2,6 @@ package me.yong_ju.example_project.domain.model.entity;
 
 import java.util.List;
 import java.util.Objects;
-import me.yong_ju.example_project.application.exception.CircleFullException;
 import me.yong_ju.example_project.domain.model.valueobject.CircleId;
 import me.yong_ju.example_project.domain.model.valueobject.CircleName;
 import me.yong_ju.example_project.domain.model.valueobject.UserId;

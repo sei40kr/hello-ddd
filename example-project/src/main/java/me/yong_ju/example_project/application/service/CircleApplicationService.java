@@ -56,7 +56,7 @@ public class CircleApplicationService {
                                                      CircleNotFoundException,
                                                      CircleFullException {
     var memberId = new UserId(command.getUserId());
-    var member = userRepository.find(memberId).orElseThrow(
+    userRepository.find(memberId).orElseThrow(
         ()
             -> new UserNotFoundException(memberId,
                                          "ユーザが見つかりませんでした。"));
