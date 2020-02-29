@@ -44,13 +44,13 @@ public class Circle {
     this.name = newName;
   }
 
-  public void join(UserId memberId) throws CircleFullException {
-    Objects.requireNonNull(memberId);
+  public void join(User member) throws CircleFullException {
+    Objects.requireNonNull(member);
 
     if (isFull()) {
       throw new CircleFullException(id);
     }
 
-    members.add(memberId);
+    members.add(member.getId());
   }
 }
