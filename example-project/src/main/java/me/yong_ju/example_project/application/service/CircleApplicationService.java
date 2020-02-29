@@ -100,7 +100,8 @@ public class CircleApplicationService {
             -> new CircleNotFoundException(circleId,
                                            "サークルが見つかりませんでした。"));
 
-    if (circle.isFull()) {
+    var circleFullSpecification = new CircleFullSpecification(userRepository);
+    if (circleFullSpecification.isSatisfiedBy(circle)) {
       throw new CircleFullException(circleId);
     }
 
