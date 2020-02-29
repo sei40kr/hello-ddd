@@ -66,7 +66,7 @@ public class CircleApplicationService {
             -> new CircleNotFoundException(id,
                                            "サークルが見つかりませんでした。"));
 
-    circle.join(member);
+    circle.join(member.getId());
 
     circleRepository.save(circle);
   }

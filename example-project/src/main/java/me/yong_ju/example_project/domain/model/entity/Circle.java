@@ -5,14 +5,17 @@ import java.util.Objects;
 import me.yong_ju.example_project.application.exception.CircleFullException;
 import me.yong_ju.example_project.domain.model.valueobject.CircleId;
 import me.yong_ju.example_project.domain.model.valueobject.CircleName;
+import me.yong_ju.example_project.domain.model.valueobject.UserId;
 
 public class Circle {
   private final CircleId id;
   private CircleName name;
   private User owner;
-  private List<User> members;
+  // private List<User> members;
+  private List<UserId> members;
 
-  public Circle(CircleId id, CircleName name, User owner, List<User> members) {
+  public Circle(CircleId id, CircleName name, User owner,
+                List<UserId> members) {
     Objects.requireNonNull(id);
     Objects.requireNonNull(name);
     Objects.requireNonNull(owner);
@@ -35,13 +38,13 @@ public class Circle {
    */
   public boolean isFull() { return members.size() >= 29; }
 
-  public void join(User member) throws CircleFullException {
-    Objects.requireNonNull(member);
+  public void join(UserId memberId) throws CircleFullException {
+    Objects.requireNonNull(memberId);
 
     if (isFull()) {
       throw new CircleFullException(id);
     }
 
-    members.add(member);
+    members.add(memberId);
   }
 }
