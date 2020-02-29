@@ -38,6 +38,12 @@ public class Circle {
    */
   public boolean isFull() { return members.size() >= 29; }
 
+  public void changeName(CircleName newName) {
+    Objects.requireNonNull(newName);
+
+    this.name = newName;
+  }
+
   public void join(UserId memberId) throws CircleFullException {
     Objects.requireNonNull(memberId);
 

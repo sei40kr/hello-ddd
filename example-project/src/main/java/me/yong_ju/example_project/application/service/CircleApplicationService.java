@@ -103,4 +103,25 @@ public class CircleApplicationService {
     var circleInvitation = new CircleInvitation(circle, fromUser, invitedUser);
     circleInvitationRepository.save(circleInvitation);
   }
+
+  public void update(CircleUpdateCommand command)
+      throws CircleNotFoundException, CanNotRegisterCircleException {
+    var circleId = new CircleId(command.getId());
+    var circle = circleRepository.find(circleId).orElseThrow(
+        ()
+            -> new CircleNotFoundException(circleId,
+                                           "サークルが見つかりませんでした。"));
+
+    if (command.getName() != null) {
+      var name = new CircleName(command.getName());
+      circle.changeName(name);
+
+      if (circleService.exists(circle)) {
+        throw new CanNotRegisterCircleException(
+            circle, "サークルは既に存在しています。");
+      }
+    }
+
+    circleRepository.save(circle);
+  }
 }
