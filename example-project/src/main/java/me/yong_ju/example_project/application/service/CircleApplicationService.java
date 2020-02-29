@@ -13,6 +13,7 @@ import me.yong_ju.example_project.domain.persistence.ICircleInvitationRepository
 import me.yong_ju.example_project.domain.persistence.ICircleRepository;
 import me.yong_ju.example_project.domain.persistence.IUserRepository;
 import me.yong_ju.example_project.domain.service.CircleService;
+import me.yong_ju.example_project.domain.specification.CircleFullSpecification;
 
 public class CircleApplicationService {
   private final ICircleFactory circleFactory;
@@ -66,7 +67,10 @@ public class CircleApplicationService {
             -> new CircleNotFoundException(id,
                                            "サークルが見つかりませんでした。"));
 
-    circle.join(member);
+    var circleFullSpecification = new CircleFullSpecification(userRepository);
+    if (circleFullSpecification.isSatisfiedBy(circle)) {
+      throw new CircleFullException(id);
+    }
 
     circleRepository.save(circle);
   }

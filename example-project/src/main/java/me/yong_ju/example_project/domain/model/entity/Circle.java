@@ -33,26 +33,13 @@ public class Circle {
 
   public User getOwner() { return owner; }
 
-  public int countMembers() { return members.size() + 1; }
+  public List<UserId> getMembers() { return members; }
 
-  /**
-   * サークルのオーナーを含めて 30 名か確認
-   */
-  public boolean isFull() { return countMembers() >= 30; }
+  public int countMembers() { return members.size() + 1; }
 
   public void changeName(CircleName newName) {
     Objects.requireNonNull(newName);
 
     this.name = newName;
-  }
-
-  public void join(User member) throws CircleFullException {
-    Objects.requireNonNull(member);
-
-    if (isFull()) {
-      throw new CircleFullException(id);
-    }
-
-    members.add(member.getId());
   }
 }
