@@ -2,7 +2,6 @@ package me.yong_ju.example_project.domain.specification;
 
 import me.yong_ju.example_project.domain.model.entity.Circle;
 import me.yong_ju.example_project.domain.model.entity.User;
-import me.yong_ju.example_project.domain.persistence.ICircleRepository;
 import me.yong_ju.example_project.domain.persistence.IUserRepository;
 
 public class CircleFullSpecification {

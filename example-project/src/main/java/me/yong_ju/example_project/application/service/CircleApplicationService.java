@@ -1,5 +1,7 @@
 package me.yong_ju.example_project.application.service;
 
+import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 import me.yong_ju.example_project.application.exception.CanNotRegisterCircleException;
 import me.yong_ju.example_project.application.exception.CircleFullException;
 import me.yong_ju.example_project.application.exception.CircleNotFoundException;
@@ -14,6 +16,7 @@ import me.yong_ju.example_project.domain.persistence.ICircleRepository;
 import me.yong_ju.example_project.domain.persistence.IUserRepository;
 import me.yong_ju.example_project.domain.service.CircleService;
 import me.yong_ju.example_project.domain.specification.CircleFullSpecification;
+import me.yong_ju.example_project.domain.specification.CircleRecommendSpecification;
 
 public class CircleApplicationService {
   private final ICircleFactory circleFactory;
@@ -128,5 +131,18 @@ public class CircleApplicationService {
     }
 
     circleRepository.save(circle);
+  }
+
+  public CircleGetRecommendResult
+  getRecommend(CircleGetRecommendRequest request) {
+    var recommendCircleSpec =
+        new CircleRecommendSpecification(LocalDateTime.now());
+
+    var circles = circleRepository.findAll();
+    var recommendCircles = circles.filter(recommendCircleSpec::isSatisfiedBy)
+                               .limit(10)
+                               .collect(Collectors.toList());
+
+    return new CircleGetRecommendResult(recommendCircles);
   }
 }
