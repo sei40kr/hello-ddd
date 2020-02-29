@@ -33,10 +33,12 @@ public class Circle {
 
   public User getOwner() { return owner; }
 
+  public int countMembers() { return members.size() + 1; }
+
   /**
    * サークルのオーナーを含めて 30 名か確認
    */
-  public boolean isFull() { return members.size() >= 29; }
+  public boolean isFull() { return countMembers() >= 30; }
 
   public void changeName(CircleName newName) {
     Objects.requireNonNull(newName);
